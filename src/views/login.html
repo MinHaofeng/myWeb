@@ -1,0 +1,77 @@
+{% block style %}
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+{% endblock style%}
+<script src="/js/jquery-1.10.2.js"></script>
+<script src="/js/md5.js"></script>
+{% block script %}
+
+{% endblock script %}
+<div id="loginDiv" class="loginDiv" style="width:200px;margin:50px auto auto auto">
+  <form id="loginForm" class="loginForm">
+    <div>登录名:</div>
+    <div>
+      <input type="text" value="" name="userName" id="userName" style="width:100%;height:30px"/>
+    </div>
+    <div style="margin-top: 10px">密 码:</div>
+    <div >
+      <input type="password" value="" name="password" id="password" style="width:100%;height:30px"/>
+    </div>
+  </form>
+  <div id="postLoginBtn" style="width:100%;height:40px;line-height: 40px;text-align: center;vertical-align: middle">
+    <button class="btn btn-primary" style="margin-top: 10px" onclick="postLogin()">登录</button>
+  </div>
+</div>
+<script>
+  function postLogin(){
+    var userName = $('#userName').val().trim();
+    var password = $('#password').val().trim();
+    if (userName === '') {
+      return popBy('#nameTxt', false, '用户名不能为空');
+    }
+    if (userName.length > 20 || userName.length < 4) {
+      return popBy('#nameTxt', false, '用户名长度只能为4－20位');
+    }
+    if (password === '') {
+      return popBy('#passwordTxt', false, '密码不能为空');
+    }
+    if (password.length > 20 || password.length < 4) {
+      return popBy('#passwordTxt', false, '密码长度只能为4－20位');
+    }
+    return $.ajax({
+      type: "POST",
+      url: "/login",
+      data: JSON.stringify({
+        name: userName,
+        password: hex_md5(password)
+      }),
+      contentType: "application/json; charset=utf-8"
+    }).done(function(json) {
+      /*if (json && json.status === 'success') {
+        return window.location.href = '/index';
+      } else {
+        return popBy('#loginBtn', false, json.result);
+      }*/
+    }).fail(function(a, b, c) {
+      //return console.log('error', a, b, c);
+    });
+
+  }
+
+  function popBy(obj,flag,message){
+    $(obj).popover('destroy');
+    $(obj).popover({
+      placement:'bottom',
+      trigger:'manual',
+      content:message
+    });
+    if(!flag) {
+      $(obj).popover('show');
+      setTimeout(function(){$(obj).popover('hide');},3000);
+      return false;
+    }
+    else {
+      $(obj).popover('hide');
+      return true;
+    }
+  }
+</script>

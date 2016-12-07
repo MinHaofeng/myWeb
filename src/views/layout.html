@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/myWeb.css">
+  {% block style %}{% endblock style %}
+
+  <script src="/js/jquery-1.10.2.js"></script>
+  <!--<script src="/js/bootstrap.min.js"></script>-->
+  <script src="/js/moment.js"></script>
+  <script src="/js/zh-cn.js"></script>
+  <script src="/js/underscore.js"></script>
+  <script src="/js/md5.js"></script>
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/scrollhelp.js"></script>
+  <script src="/js/myWeb.js"></script>
+  <script src="/js/jquery.cookies.js"></script>
+  <script src="/js/layer/layer.js"></script>
+  <!--<script src="/js/user/model/user.js"></script>-->
+  <script src="/js/filesize.min.js"></script>
+  {% block script %}{% endblock script %}
+
+</head>
+<body>
+  <div id="advert" class="advert">
+    <div id="head" class="head">
+      <div id="titleBtns" class="titleBtns">
+        <div id="tt_home" class="titles" data-target="home" onclick="goToPage(this)">
+          <span>首页</span>
+        </div>
+        <div id="tt_film" class="titles" data-target="film" onclick="goToPage(this)">
+          <span>电影</span>
+        </div>
+        <div id="tt_book" class="titles" data-target="book" onclick="goToPage(this)">
+          <span>书籍</span>
+        </div>
+        <div id="tt_music" class="titles" data-target="music" onclick="goToPage(this)">
+          <span>音乐</span>
+        </div>
+        <div id="loginBtns" class="loginBtns">
+          <a href="javascript:void(0)" onclick="showLogin()"><span style="color:black">登录</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% block main %}
+  {% endblock main%}
+
+  <div id="bottom" class="bottom">
+    <div class="infos">
+      author:Zoren<br>
+      tel:15861171989
+    </div>
+  </div>
+
+  {% block lazyscript %}{% endblock lazyscript %}
+</body>
+</html>

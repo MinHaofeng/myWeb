@@ -1,0 +1,41 @@
+{% extends '../layout.html' %}
+
+
+{% block style %}
+<link rel="stylesheet" href="/css/films/film.css">
+{% endblock style%}
+
+{% block script %}
+
+<script src="/js/films/film.js"></script>
+
+{% endblock script %}
+
+{% block main %}
+<div id="film_content" class="film_content" ng-app="myFilm" ng-controller="myFilmCtrl">
+    <div id="film_left" class="film_left">
+        <div class="film_title">
+            <span id="film_title1">2016必看电影</span>
+        </div>
+
+        <div id="film_list1" class="film_list">
+            {% raw %}
+            <div class="lists" ng-repeat="x in films1" data-id="{{x.id}}">
+                <span class="lists_left">{{x.name}}</span>
+                <span class="lists_right">{{x.createtime}}</span>
+            </div>
+            {% endraw %}
+        </div>
+    </div>
+    <div id="film_right" class="film_right">
+
+    </div>
+</div>
+
+{% raw %}
+{% endraw %}
+
+{% endblock main%}
+
+{% block lazyscript %}
+{% endblock lazyscript %}
