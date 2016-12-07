@@ -25,24 +25,39 @@
 
 </head>
 <body>
+<script>
+  $(function(){
+    //检测登录信息
+    if($.cookie('name')){
+      $('#loginUser').html($.cookie('name'));
+      $('#loginA').attr('onclick','');
+    }else{
+      $('#logoutA').hide();
+    }
+  })
+</script>
   <div id="advert" class="advert">
     <div id="head" class="head">
       <div id="titleBtns" class="titleBtns">
-        <div id="tt_home" class="titles" data-target="home" onclick="goToPage(this)">
-          <span>首页</span>
+        <div id="menus" style="float:left">
+          <div id="tt_home" class="titles" data-target="home" onclick="goToPage(this)">
+            <span>首页</span>
+          </div>
+          <div id="tt_film" class="titles" data-target="film" onclick="goToPage(this)">
+            <span>电影</span>
+          </div>
+          <div id="tt_book" class="titles" data-target="book" onclick="goToPage(this)">
+            <span>书籍</span>
+          </div>
+          <div id="tt_music" class="titles" data-target="music" onclick="goToPage(this)">
+            <span>音乐</span>
+          </div>
         </div>
-        <div id="tt_film" class="titles" data-target="film" onclick="goToPage(this)">
-          <span>电影</span>
+        <div id="loginBtns" class="loginBtns" data-target="">
+          <a id="loginA" href="javascript:void(0)" onclick="showLogin()"><span style="color:black" id="loginUser">登录</span></a>
+          &nbsp|&nbsp<a id="logoutA" href="/logout"><span style="color:black" id="logoutUser">注销</span></a>
         </div>
-        <div id="tt_book" class="titles" data-target="book" onclick="goToPage(this)">
-          <span>书籍</span>
-        </div>
-        <div id="tt_music" class="titles" data-target="music" onclick="goToPage(this)">
-          <span>音乐</span>
-        </div>
-        <div id="loginBtns" class="loginBtns">
-          <a href="javascript:void(0)" onclick="showLogin()"><span style="color:black">登录</span></a>
-        </div>
+
       </div>
 
     </div>

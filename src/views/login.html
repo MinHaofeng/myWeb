@@ -3,6 +3,7 @@
 {% endblock style%}
 <script src="/js/jquery-1.10.2.js"></script>
 <script src="/js/md5.js"></script>
+<script src="/js/layer/layer.js"></script>
 {% block script %}
 
 {% endblock script %}
@@ -18,10 +19,24 @@
     </div>
   </form>
   <div id="postLoginBtn" style="width:100%;height:40px;line-height: 40px;text-align: center;vertical-align: middle">
-    <button class="btn btn-primary" style="margin-top: 10px" onclick="postLogin()">登录</button>
+    <button class="btn btn-primary" style="margin-top: 10px" onclick="postLogin()" id="loginClick" data-target="{{targetUrl}}">登录</button>
   </div>
 </div>
 <script>
+  $(function(){
+    //监听回车事件
+    $("#loginDiv").bind("keydown",function(e){
+      // 兼容FF和IE和Opera
+      var theEvent = e || window.event;
+      var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+      if (code == 13) {
+        //回车执行查询
+        postLogin();
+      }
+    });
+  })
+
+  //上传登录信息尝试登录
   function postLogin(){
     var userName = $('#userName').val().trim();
     var password = $('#password').val().trim();
@@ -37,6 +52,7 @@
     if (password.length > 20 || password.length < 4) {
       return popBy('#passwordTxt', false, '密码长度只能为4－20位');
     }
+
     return $.ajax({
       type: "POST",
       url: "/login",
@@ -44,19 +60,28 @@
         name: userName,
         password: hex_md5(password)
       }),
-      contentType: "application/json; charset=utf-8"
-    }).done(function(json) {
-      /*if (json && json.status === 'success') {
-        return window.location.href = '/index';
-      } else {
-        return popBy('#loginBtn', false, json.result);
-      }*/
+      contentType: "application/json; charset=utf-8",
+      success:function(oUser){
+        if(oUser.status != '1'){
+          return alert(oUser.message);
+        }
+        parent.layer.closeAll();
+      }
+    }).done(function(oUser) {
+      //var layerObj = $('.layui-layer');
+      //layer.close(1)
+      /*$.each(layerObj, function(){
+        var i = $(thus).attr('times');
+        layer.close(i);
+      });*/
+      //location.href = $('#loginClick').attr('data-target')
+      //location.reload();
     }).fail(function(a, b, c) {
       //return console.log('error', a, b, c);
     });
-
   }
 
+  //提示信息
   function popBy(obj,flag,message){
     $(obj).popover('destroy');
     $(obj).popover({

@@ -15,3 +15,6 @@ app.route('/login')
 
 app.route('/login')
     .post(index.postLogin)
+
+app.route('/logout')
+    .get(index.logout)

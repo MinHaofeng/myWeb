@@ -19,7 +19,7 @@ exports.postLogin = function(req, res) {
     })
   }
   var oUser = req.body;
-  User.findOne({'name':oUser.name}).exec(function(err,user){
+  User.find({'name':oUser.name}).exec(function(err,user){
     if(err){
       return res.json({
         'status' : '0',
@@ -37,16 +37,25 @@ exports.postLogin = function(req, res) {
         'message' : 'Userame is not exist!'
       })
     }else{
+      user = user[0];
       if(user.password != oUser.password){
         return res.json({
           'status' : '0',
           'message' : 'Password wrong!'
         })
       }
+      res.cookie('name', user.name, 30);
+      res.cookie('type', user.type, 30);
       return res.json({
         'status' : '1',
-        'message' : 'success'
+        'data' : user
       })
     }
   })
+};
+
+exports.logout = function(req, res) {
+  res.clearCookie('name');
+  res.clearCookie('type');
+  return res.redirect('/index');
 };
