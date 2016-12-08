@@ -49,6 +49,7 @@ app.use(require(path.join(__dirname, './src/libs/checkinstall')))
 // 路由中间件
 app.use(require(path.join(__dirname, './src/routes/index.server.routes')))
 app.use(require(path.join(__dirname, './src/routes/film.server.routes')))
+app.use(require(path.join(__dirname, './src/routes/manager.server.routes')))
 
 // 错误处理中间件
 app.use(require(path.join(__dirname, './src/libs/err500')))

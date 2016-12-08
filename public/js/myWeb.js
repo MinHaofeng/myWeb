@@ -11,6 +11,9 @@ $(function(){
 //头部点击页面跳转
 function goToPage(ele){
     var targetUrl = $(ele).attr('data-target');
+    if(targetUrl == 'manager'){
+        return window.open('/manager/index');
+    }
     if(targetUrl == 'home'){
         return location.href = '/';
     }

@@ -1,0 +1,54 @@
+
+
+{% block style %}
+    <link rel="stylesheet" href="/css/films/addFilm.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.css"/>
+{% endblock style%}
+    <script src="/js/build/jquery.datetimepicker.full.js"></script>
+    <script src="/js/films/addFilm.js"></script>
+{% block script %}
+
+{% endblock script %}
+<div id="addFilmDiv" class="addFilmDiv">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="filmName" class="col-sm-2 control-label">影片名</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="filmName" placeholder="请输影片名字">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="publishTime" class="col-sm-2 control-label">上映时间</label>
+            <div class="col-sm-4">
+                <input name="publishTime" class="form-control" type="text" value="" id="datetimepicker" />
+            </div>
+            <label for="country" class="col-sm-2 control-label">上映地区</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="country" placeholder="请输影片上映地区">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="actor" class="col-sm-2 control-label" style="height:28px">演员表</label>
+            <div class="col-sm-10 actor-list">
+                <input type="text" class=""  placeholder="请输人物名字">:
+                <input type="text" class=""  placeholder="请输演员名字">
+                <span class="glyphicon glyphicon-plus addActor" style="width: 10px;height:10px" onclick="addActor(this)"></span>&nbsp
+                <span class="glyphicon glyphicon-minus deleteActor" style="width: 10px;height:10px" onclick="deleteActor(this)"></span>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="construction" class="col-sm-2 control-label">影片简介</label>
+            <div class="col-sm-10">
+                <textarea rows="13" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10" style="text-align: center">
+                <button class="btn btn-default postNewFilm" id="postNewFilm">上 传</button>
+            </div>
+        </div>
+    </form>
+</div>

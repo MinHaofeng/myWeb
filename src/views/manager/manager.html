@@ -1,23 +1,141 @@
-{% extends '../layout.html' %}
+<!doctype html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/manager/manager.css">
+    {% block style %}{% endblock style %}
 
+    <script src="/js/jquery-1.10.2.js"></script>
+    <!--<script src="/js/bootstrap.min.js"></script>-->
+    <script src="/js/moment.js"></script>
+    <script src="/js/zh-cn.js"></script>
+    <script src="/js/underscore.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/scrollhelp.js"></script>
+    <script src="/js/myWeb.js"></script>
+    <script src="/js/jquery.cookies.js"></script>
+    <script src="/js/layer/layer.js"></script>
+    <!--<script src="/js/user/model/user.js"></script>-->
+    <script src="/js/filesize.min.js"></script>
+    <script src="/js/manager/manager.js"></script>
+    {% block script %}{% endblock script %}
 
-{% block style %}
-<link rel="stylesheet" href="/css/manager/manager.css">
-{% endblock style%}
+</head>
+<body>
+<div id="manager_content" class="manager_content">
+    <div id="leftDiv" class="leftDiv">
+        <div class="list">
+            <ul class="yiji">
+                <li><a href="#" class="inactive first">电影类</a>
+                    <ul style="display: none">
+                        <li>
+                            <a href="#" class="nothird active second first-menu" onclick="addFilms()">添加电影</a>
+                        </li>
+                        <li class="last">
+                            <a href="#" class="inactive second">电影分组</a>
+                            <ul>
+                                <li><a href="#" class="third">最新电影推荐</a></li>
+                                <li><a href="#" class="third">经典好评电影</a></li>
 
-{% block script %}
-
-<script src="/js/manager/manager.js"></script>
-
-{% endblock script %}
-
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#" class="inactive first">书籍类</a>
+                    <ul style="display: none">
+                        <li>
+                            <a href="#" class="nothird active second first-menu">添加书籍</a>
+                        </li>
+                        <li>
+                            <a href="#" class="inactive second">书籍分组</a>
+                            <ul>
+                                <li><a href="#" class="third">最新书籍推荐</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#" class="inactive first">音乐类</a>
+                    <ul style="display: none">
+                        <li>
+                            <a href="#" class="nothird active second first-menu">添加音乐</a>
+                        </li>
+                        <li>
+                            <a href="#" class="inactive second">音乐分组</a>
+                            <ul>
+                                <li><a href="#" class="third">最新音乐推荐</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="rightDiv" class="rightDiv">
+        <div>
+    </div>
+</div>
 {% block main %}
-
-
-{% raw %}
-{% endraw %}
-
 {% endblock main%}
 
 {% block lazyscript %}
 {% endblock lazyscript %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.third').click(function(){
+                $('.third').removeClass('active2');
+                $(this).addClass('active2');
+            })
+
+            $('.nothird').click(function(){
+                $('.second').removeClass('active');
+                $(this).addClass('active');
+                $(this).parents('li').siblings('li').children('a').removeClass('inactives');
+                $(this).parents('li').siblings('li').children('ul').hide();
+            })
+
+            $('.inactive').click(function(){
+                if($(this).hasClass('first')){
+                    $('.active').removeClass('active');
+                    $(this).siblings('ul').find('.first-menu').click();
+                }
+
+                if($(this).hasClass('second')){
+                    if($(this).hasClass('active')){
+                        $(this).removeClass('active')
+                    }else{
+                        $('.second').removeClass('active');
+                        $(this).addClass('active');
+                    }
+                    $(this).parent().siblings('li').children('a').removeClass('inactives');
+                    $(this).parent().siblings('li').children('ul').hide();
+                }
+                if($(this).siblings('ul').css('display')=='none'){
+                    $(this).parent('li').siblings('li').removeClass('inactives');
+                    $(this).addClass('inactives');
+                    $(this).siblings('ul').slideDown(100).children('li');
+
+                    $(this).parents('li').siblings('li').children('ul').parent('li').children('a').removeClass('inactives');
+                    $(this).parents('li').siblings('li').children('ul').slideUp(100);
+
+
+                }else{
+                    //控制自身变成+号
+                    $(this).removeClass('inactives');
+                    //控制自身菜单下子菜单隐藏
+                    $(this).siblings('ul').slideUp(100);
+                    //控制自身子菜单变成+号
+                    $(this).siblings('ul').children('li').children('ul').parent('li').children('a').addClass('inactives');
+                    //控制自身菜单下子菜单隐藏
+                    $(this).siblings('ul').children('li').children('ul').slideUp(100);
+
+                    //控制同级菜单只保持一个是展开的（-号显示）
+                    $(this).siblings('ul').children('li').children('a').removeClass('inactives');
+                }
+            })
+        });
+    </script>
+</body>
+</html>

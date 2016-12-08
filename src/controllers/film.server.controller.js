@@ -52,3 +52,7 @@ exports.getFilms = function(req, res) {
 
   })
 };
+
+exports.addFilmContent = function(req,res){
+  return res.render('films/addFilm')
+}
