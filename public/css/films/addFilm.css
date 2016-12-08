@@ -5,3 +5,7 @@
 .postNewFilm{
    width:65px;
 }
+
+.addActor,.deleteActor{
+    cursor: pointer;
+}
