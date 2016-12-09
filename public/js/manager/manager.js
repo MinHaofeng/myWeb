@@ -1,6 +1,7 @@
 $(function(){
     $('.titles').removeClass('active');
     $('#tt_manager').addClass('active');
+    //$('.yiji').children('li')[0].children('a')[0].click();
 })
 
 function addFilms(){

@@ -15,6 +15,10 @@ var FilmSchema = new Schema({
     type: String,
     "default": ''
   },
+  createtimeshow: {
+    type: String,
+    "default": ''
+  },
   publishtime: {
     type: String,
     "default": ''

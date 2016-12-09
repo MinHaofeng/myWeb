@@ -82,21 +82,5 @@
   }
 
   //提示信息
-  function popBy(obj,flag,message){
-    $(obj).popover('destroy');
-    $(obj).popover({
-      placement:'bottom',
-      trigger:'manual',
-      content:message
-    });
-    if(!flag) {
-      $(obj).popover('show');
-      setTimeout(function(){$(obj).popover('hide');},3000);
-      return false;
-    }
-    else {
-      $(obj).popover('hide');
-      return true;
-    }
-  }
+
 </script>

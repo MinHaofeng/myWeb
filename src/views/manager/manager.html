@@ -9,7 +9,7 @@
     {% block style %}{% endblock style %}
 
     <script src="/js/jquery-1.10.2.js"></script>
-    <!--<script src="/js/bootstrap.min.js"></script>-->
+    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/moment.js"></script>
     <script src="/js/zh-cn.js"></script>
     <script src="/js/underscore.js"></script>
@@ -29,7 +29,7 @@
     <div id="leftDiv" class="leftDiv">
         <div class="list">
             <ul class="yiji">
-                <li><a href="#" class="inactive first">电影类</a>
+                <li><a href="#" id="defaultClick" class="inactive first">电影类</a>
                     <ul style="display: none">
                         <li>
                             <a href="#" class="nothird active second first-menu" onclick="addFilms()">添加电影</a>
@@ -135,6 +135,7 @@
                     $(this).siblings('ul').children('li').children('a').removeClass('inactives');
                 }
             })
+            $('#defaultClick').click();
         });
     </script>
 </body>

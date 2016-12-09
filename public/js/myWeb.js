@@ -37,3 +37,41 @@ function showLogin(){
     });
 }
 
+function popBy(obj,flag,message){
+    $(obj).popover('destroy');
+    $(obj).popover({
+        placement:'bottom',
+        trigger:'manual',
+        content:message
+    });
+    if(!flag) {
+        $(obj).popover('show');
+        setTimeout(function(){$(obj).popover('hide');},3000);
+        return false;
+    }
+    else {
+        $(obj).popover('hide');
+        return true;
+    }
+}
+
+/*
+* 格式化时间，nowdate参数必须为date格式——new Date()方法创建的时间对象
+*          separator参数是string类型，规定年月日之间的分隔符,长度为1,如果长度不符，默认使用'/'
+* */
+function formatTime(nowdate,separator){
+    if(separator.length > 1){
+        separator = '/';
+    }
+    var year = nowdate.getFullYear();
+    var month = nowdate.getMonth()+1;
+    month = month >= 10 ? month : '0' + month;
+    var day = nowdate.getDate();
+    day = day >= 10 ? day : '0' + day;
+    var hour = nowdate.getHours();
+    hour = hour >= 10 ? hour : '0' + hour;
+    var minutes = nowdate.getMinutes();
+    minutes = minutes >= 10 ? minutes : '0' + minutes;
+    var str_date = '' + year + separator + month + separator + day + ' ' + hour + ':' + minutes;
+    return str_date;
+}
