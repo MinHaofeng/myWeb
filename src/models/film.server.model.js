@@ -34,6 +34,10 @@ var FilmSchema = new Schema({
   mainactor: {
     type: Array,
     "default": ['']
+  },
+  groupid: {
+    type: String,
+    "default": ''
   }
 });
 

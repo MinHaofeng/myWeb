@@ -25,7 +25,7 @@
 
 </head>
 <body>
-<div id="manager_content" class="manager_content">
+<div id="manager_content" class="manager_content" >
     <div id="leftDiv" class="leftDiv">
         <div class="list">
             <ul class="yiji">
@@ -37,9 +37,8 @@
                         <li class="last">
                             <a href="#" class="inactive second">电影分组</a>
                             <ul>
-                                <li><a href="#" class="third">最新电影推荐</a></li>
-                                <li><a href="#" class="third">经典好评电影</a></li>
-
+                                <li><a href="#" class="third" onclick="showFilmGroups()">最新电影推荐</a></li>
+                                <li><a href="#" class="third" onclick="showFilmGroups()">经典好评电影</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -74,7 +73,6 @@
         </div>
     </div>
     <div id="rightDiv" class="rightDiv">
-        <div>
     </div>
 </div>
 {% block main %}
@@ -91,6 +89,7 @@
 
             $('.nothird').click(function(){
                 $('.second').removeClass('active');
+                $('.active2').removeClass('active2');
                 $(this).addClass('active');
                 $(this).parents('li').siblings('li').children('a').removeClass('inactives');
                 $(this).parents('li').siblings('li').children('ul').hide();

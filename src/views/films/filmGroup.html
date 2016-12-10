@@ -1,0 +1,42 @@
+
+
+{% block style %}
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/films/filmGroup.css" />
+{% endblock style%}
+
+{% block script %}
+<script src="/js/films/filmGroup.js"></script>
+{% endblock script %}
+
+{% block main %}
+<div class="filmGroupDiv" id="filmGroupDiv">
+    <div class="groupListDiv" id="groupListDiv" >
+        <button type="button" class="btn btn-info">未分组影片</button>
+        <button type="button" class="btn btn-info">分组内影片</button>
+    </div>
+    <div id="filmListDiv">
+        <table class="table table-hover" id="filmListTable">
+            <thead>
+            <tr>
+                <th>影片名称</th>
+                <th>创建时间</th>
+                <th>地区</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% raw %}
+            <tr ng-repeat="x in films1" data-id="{{x.id}}">
+                <td>{{x.name}}</td>
+                <td>{{x.createtimeshow}}</td>
+                <td>{{x.country}}</td>
+                <td><button type="button" class="btn btn-default addToGroup">加入分组</button></td>
+                <td><button type="button" class="btn btn-default removeFromGroup" style="display:none">移出分组</button></td>
+            </tr>
+            {% endraw %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock main%}

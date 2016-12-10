@@ -5,6 +5,7 @@ var Film = mongoose.model('Film')
 var crypto = require('crypto')
 var async = require('async')
 var logger = require('../models/logger.server.model')
+var FilmGroup = mongoose.model('FilmGroup')
 
 exports.index = function(req, res) {
   return res.render('films/film', {
@@ -61,8 +62,34 @@ exports.getFilms = function(req, res) {
   })
 };
 
+exports.addGroup = function(req,res) {
+  FilmGroup.create({'name':'2016必看电影','type':'film'},function(err,group){
+    if (err) {
+      return res.status(500).send({
+        status: "fail"
+      });
+    }
+    group.id = group._id;
+    return group.save(function(err,newgroup) {
+      if (err) {
+        return res.status(500).send({
+          status: "fail"
+        });
+      }
+      return res.json({
+        'status' : '1',
+        'data' : newgroup
+      });
+    });
+  })
+}
+
 exports.addFilmContent = function(req,res){
   return res.render('films/addFilm')
+}
+
+exports.filmGroupContent = function(req,res){
+  return res.render('films/filmGroup')
 }
 
 /*

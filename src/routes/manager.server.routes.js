@@ -9,3 +9,6 @@ app.route('/manager/index')
 
 app.route('/manager/addFilm')
     .get(film.addFilmContent)
+
+app.route('/manager/showFilmGroup')
+    .get(film.filmGroupContent)

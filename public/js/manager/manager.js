@@ -16,3 +16,17 @@ function addFilms(){
     }).fail(function(a, b, c) {
     });
 }
+
+function showFilmGroups(){
+    $.ajax({
+        type: "GET",
+        url: "/manager/showFilmGroup",
+        success:function(content){
+            $('.xdsoft_datetimepicker').remove();//删除时间控件
+            $('#rightDiv').html(content);
+        }
+    }).done(function() {
+
+    }).fail(function(a, b, c) {
+    });
+}
