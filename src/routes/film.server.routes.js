@@ -12,5 +12,12 @@ app.route('/film/addFilm')
 app.route('/film/getFilms')
     .get(film.getFilms)
 
+//test
 app.route('/film/addgroup')
     .post(film.addGroup)
+
+app.route('/film/addtogroup')
+    .post(film.addToGroup)
+
+app.route('/film/getgroups')
+    .get(film.getGroups)

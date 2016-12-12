@@ -25,7 +25,7 @@
 
 </head>
 <body>
-<div id="manager_content" class="manager_content" >
+<div id="manager_content" class="manager_content" ng-app="managerApp" ng-controller="managerCtrl">
     <div id="leftDiv" class="leftDiv">
         <div class="list">
             <ul class="yiji">
@@ -36,9 +36,11 @@
                         </li>
                         <li class="last">
                             <a href="#" class="inactive second">电影分组</a>
-                            <ul>
-                                <li><a href="#" class="third" onclick="showFilmGroups()">最新电影推荐</a></li>
-                                <li><a href="#" class="third" onclick="showFilmGroups()">经典好评电影</a></li>
+                            <ul ng-repeat="x in groups">
+                                {% raw %}
+                                <li><a href="#" class="third" data-value="{{x.id}}" onclick="showFilmGroups(this)">{{x.name}}</a></li>
+                                {% endraw %}
+                                <!--<li><a href="#" class="third" onclick="showFilmGroups()">经典好评电影</a></li>-->
                             </ul>
                         </li>
                     </ul>
@@ -82,11 +84,18 @@
 {% endblock lazyscript %}
     <script type="text/javascript">
         $(document).ready(function() {
+            bindThird();
+            bindNothird();
+            bindInactive();
+            $('#defaultClick').click();
+        });
+        function bindThird(){
             $('.third').click(function(){
                 $('.third').removeClass('active2');
                 $(this).addClass('active2');
             })
-
+        }
+        function bindNothird(){
             $('.nothird').click(function(){
                 $('.second').removeClass('active');
                 $('.active2').removeClass('active2');
@@ -94,7 +103,9 @@
                 $(this).parents('li').siblings('li').children('a').removeClass('inactives');
                 $(this).parents('li').siblings('li').children('ul').hide();
             })
+        }
 
+        function bindInactive(){
             $('.inactive').click(function(){
                 if($(this).hasClass('first')){
                     $('.active').removeClass('active');
@@ -134,8 +145,7 @@
                     $(this).siblings('ul').children('li').children('a').removeClass('inactives');
                 }
             })
-            $('#defaultClick').click();
-        });
+        }
     </script>
 </body>
 </html>

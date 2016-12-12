@@ -47,7 +47,13 @@ exports.addFilm = function(req, res) {
 };
 
 exports.getFilms = function(req, res) {
-  Film.find().exec(function(err,films){
+  var queryData = {}
+  var groupid = '';
+  if(req.query.groupid){
+    groupid = req.query.groupid
+    queryData.groupid = { $ne : groupid}
+  }
+  Film.find(queryData).exec(function(err,films){
     if(err){
       return res.json({
         'status' : '0',
@@ -84,6 +90,40 @@ exports.addGroup = function(req,res) {
   })
 }
 
+exports.addToGroup = function(req,res) {
+  var data = req.body;
+  if(!data){
+    return res.json({
+      'status' : '0',
+      'message' : 'no data acepted!'
+    })
+  }
+  Film.findById(Object(data.filmid)).exec(function(err,film){
+    film.groupid = data.groupid;
+    film.save(function(err,newfilm){
+      if(err){
+        return res.json({
+          'status' : '0',
+          'message' : 'group info save failed!'
+        })
+      }
+      return Film.find({'groupid' : { $ne : data.groupid }}).exec(function(err,films){
+        if(err){
+          return res.json({
+            'status' : '0',
+            'message' : 'new list cant not get!'
+          })
+        }
+
+        return res.json({
+          'status' : '1',
+          'data' : films
+        })
+      })
+    })
+  })
+}
+
 exports.addFilmContent = function(req,res){
   return res.render('films/addFilm')
 }
@@ -91,6 +131,21 @@ exports.addFilmContent = function(req,res){
 exports.filmGroupContent = function(req,res){
   return res.render('films/filmGroup')
 }
+
+exports.getGroups = function(req, res) {
+  FilmGroup.find().exec(function(err,groups){
+    if(err){
+      return res.json({
+        'status' : '0',
+        'message' : 'Failed to find films!'
+      })
+    }
+    return res.json({
+      'status' : '1',
+      'data' : groups
+    })
+  })
+};
 
 /*
  * 格式化时间，nowdate参数必须为date格式——new Date()方法创建的时间对象
