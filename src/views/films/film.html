@@ -14,21 +14,37 @@
 {% block main %}
 <div id="film_content" class="film_content" ng-app="myFilm" ng-controller="myFilmCtrl">
     <div id="film_left" class="film_left">
+        {% raw %}
         <div class="film_title">
-            <span id="film_title1">2016必看电影</span>
+            <span id="film_title1">{{film_title1}}</span>
         </div>
+        {% endraw %}
 
-        <div id="film_list1" class="film_list">
-            {% raw %}
+        {% raw %}
+        <div id="film_list1" class="film_list" data-id="">
             <div class="lists" ng-repeat="x in films1" data-id="{{x.id}}">
+                <span class="lists_left">{{x.name}}</span>
+                <span class="lists_right">{{x.createtimeshow}}</span>
+            </div>
+        </div>
+        {% endraw %}
+    </div>
+    <div id="film_right" class="film_right">
+
+        {% raw %}
+        <div class="film_title">
+            <span id="film_title2">{{film_title2}}</span>
+        </div>
+        {% endraw %}
+
+        <div id="film_list2" class="film_list">
+            {% raw %}
+            <div class="lists" ng-repeat="x in films2" data-id="{{x.id}}">
                 <span class="lists_left">{{x.name}}</span>
                 <span class="lists_right">{{x.createtimeshow}}</span>
             </div>
             {% endraw %}
         </div>
-    </div>
-    <div id="film_right" class="film_right">
-
     </div>
 </div>
 

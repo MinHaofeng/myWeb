@@ -18,7 +18,7 @@ exports.addFilm = function(req, res) {
   if(!_film){
     return res.json({
       status:'0',
-      message:'no data acepted!'
+      message:'no data accepted!'
     })
   }
   var nowdate = new Date();
@@ -49,11 +49,39 @@ exports.addFilm = function(req, res) {
 exports.getFilms = function(req, res) {
   var queryData = {}
   var groupid = '';
+  if(req.query.group){
+    groupid = req.query.group;
+    queryData.groupid = groupid;
+  }
   if(req.query.groupid){
     groupid = req.query.groupid
     queryData.groupid = { $ne : groupid}
   }
   Film.find(queryData).exec(function(err,films){
+    if(err){
+      return res.json({
+        'status' : '0',
+        'message' : 'Failed to find films!'
+      })
+    }
+    return res.json({
+      'status' : '1',
+      'data' : films
+    })
+
+  })
+};
+
+exports.getFilmsInGroup = function(req, res) {
+  var queryData = {}
+  var groupid = '';
+  if(!req.query.groupid){
+    return res.json({
+      'status' : '0',
+      'message' : 'groupid not accepted!'
+    })
+  }
+  Film.find({'groupid':req.query.groupid}).exec(function(err,films){
     if(err){
       return res.json({
         'status' : '0',
@@ -124,6 +152,46 @@ exports.addToGroup = function(req,res) {
   })
 }
 
+exports.removeFromGroup = function(req,res) {
+  var data = req.body;
+  if(!data){
+    return res.json({
+      'status' : '0',
+      'message' : 'no data acepted!'
+    })
+  }
+  Film.findById(Object(data.filmid)).exec(function(err,film){
+    if(film.groupid != data.groupid){
+      return res.json({
+        'status' : '0',
+        'message' : 'film is not in the group!'
+      })
+    }
+    film.groupid = '';
+    film.save(function(err,newfilm){
+      if(err){
+        return res.json({
+          'status' : '0',
+          'message' : 'group info save failed!'
+        })
+      }
+      return Film.find({'groupid' : data.groupid}).exec(function(err,films){
+        if(err){
+          return res.json({
+            'status' : '0',
+            'message' : 'new list cant not get!'
+          })
+        }
+
+        return res.json({
+          'status' : '1',
+          'data' : films
+        })
+      })
+    })
+  })
+}
+
 exports.addFilmContent = function(req,res){
   return res.render('films/addFilm')
 }
@@ -133,7 +201,7 @@ exports.filmGroupContent = function(req,res){
 }
 
 exports.getGroups = function(req, res) {
-  FilmGroup.find().exec(function(err,groups){
+  FilmGroup.find().sort({'index':1}).exec(function(err,groups){
     if(err){
       return res.json({
         'status' : '0',

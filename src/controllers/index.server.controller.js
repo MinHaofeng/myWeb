@@ -46,6 +46,7 @@ exports.postLogin = function(req, res) {
       }
       res.cookie('name', user.name, 30);
       res.cookie('type', user.type, 30);
+      res.cookie('token', user.token, 30);
       return res.json({
         'status' : '1',
         'data' : user

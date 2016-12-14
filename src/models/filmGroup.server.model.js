@@ -14,6 +14,10 @@ var FilmGroupSchema = new Schema({
   type: {
     type: String,
     "default": ''
+  },
+  index: {
+    type: Number,
+    "default": 0
   }
 });
 

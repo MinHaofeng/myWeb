@@ -12,8 +12,8 @@
 {% block main %}
 <div class="filmGroupDiv" id="filmGroupDiv">
     <div class="groupListDiv" id="groupListDiv" >
-        <button type="button" class="btn btn-info">未分组影片</button>
-        <button type="button" class="btn btn-info">分组内影片</button>
+        <button type="button" class="btn btn-info" onclick="getFilms()">未分组影片</button>
+        <button type="button" class="btn btn-info" onclick="getFilmsInGroup()">分组内影片</button>
     </div>
     <div id="filmListDiv">
         <table class="table table-hover" id="filmListTable">
