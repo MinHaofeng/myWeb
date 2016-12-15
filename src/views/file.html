@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+
+{% block style %}
+<link href="css/jquery.fileupload.css" rel="stylesheet" />
+
+{% endblock style%}
+
+{% block script %}
+
+<script>
+
+	var __slice = Array.prototype.slice;
+	var __hasProp = Object.prototype.hasOwnProperty;
+	var __bind = function(fn, me) {
+		return function() {
+			return fn.apply(me, arguments);
+		};
+	};
+	var __extends = function(child, parent) {
+		for (var key in parent) {
+			if (__hasProp.call(parent, key)) child[key] = parent[key];
+		}
+		function ctor() {
+			this.constructor = child;
+		}
+		ctor.prototype = parent.prototype;
+		child.prototype = new ctor;
+		child.__super__ = parent.prototype;
+		return child;
+	};
+	var __indexOf = Array.prototype.indexOf ||
+			function(item) {
+				for (var i = 0, l = this.length; i < l; i++) {
+					if (this[i] === item) return i;
+				}
+				return -1;
+			};
+	(function() {
+		$(function() {
+			return fileUpload();
+		});
+		$(function() {
+			return compressAndUpload();
+		});
+		this.isSave = true;
+		return window.onbeforeunload = function() {
+			if (!isSave) {
+				return '正在上传文件，重新加载或关闭此网页将取消上传，是否确定重新加载或关闭此网页';
+			}
+		};
+	}).call(this);
+
+</script>
+
+{% endblock script %}
+
+{% block main %}
+
+
+<div id="operateMediaArea">
+
+
+
+	<div class="well well-sm">
+		<form class="container fixed-width" id="uploadForm ">
+			<span class="btn btn-default fileinput-button"><i class="glyphicon glyphicon-upload"></i><span> 上传文件</span><input id="uploadInput" type="file" name="files[]" multiple="multiple" style="width: 100px; height: 30px"/></span>
+
+		</form>
+	</div>
+</div>
+
+
+{% endblock main%}
+
+{% block lazyscript %}
+
+<script src="/js/vendor/jquery.ui.widget.js"></script>
+<script src="/js/jquery.fileupload.js"></script>
+<script src="/js/gbvision.js"></script>
+<script src="/js/media.js"></script>
+
+{% endblock lazyscript %}

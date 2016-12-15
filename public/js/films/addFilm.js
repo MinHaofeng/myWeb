@@ -15,6 +15,7 @@ $('#datetimepicker2').datetimepicker({
 });
 $(function(){
     $('.deleteActor').hide();
+    fileUpload();
 })
 
 function addActor(ele){

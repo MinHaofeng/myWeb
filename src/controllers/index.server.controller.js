@@ -1,9 +1,45 @@
+var formidable = require('formidable')
+
 var mongoose = require('mongoose')
 var User = mongoose.model('User')
 exports.index = function(req, res) {
   return res.render('index', {
     title: '首页'
   });
+};
+
+exports.file = function(req, res) {
+  return res.render('file', {
+    title: '上传'
+  });
+};
+
+exports.upload = function(req, res) {
+  var obj ={};
+  var form = new formidable.IncomingForm({
+    encoding:"utf-8",
+    uploadDir:"public/upload",  //文件上传地址
+    keepExtensions:true  //保留后缀
+  });
+  form.parse(req)
+      .on('field', function(name, value) {  // 字段
+        obj[name] = value;
+      })
+      .on('file', function(name, file) {  //文件
+        obj[name] = file;
+      })
+      .on('error', function(error) {  //结束
+        return res.json({
+          'status' : '0',
+          'message' : error
+        })
+      })
+      .on('end', function() {  //结束
+        return res.json({
+          'status' : '1',
+          'message' : 'success'
+        })
+      });
 };
 
 exports.login = function(req, res) {

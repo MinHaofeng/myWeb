@@ -18,3 +18,9 @@ app.route('/login')
 
 app.route('/logout')
     .get(index.logout)
+
+app.route('/file')
+    .get(index.file)
+
+app.route('/upload')
+    .post(index.upload)
