@@ -2,6 +2,7 @@ $(function(){
     $('.titles').removeClass('active');
     $('#tt_manager').addClass('active');
     //$('.yiji').children('li')[0].children('a')[0].click();
+
 })
 
 var app = angular.module('managerApp', []);
@@ -23,7 +24,6 @@ function addFilms(){
             $('#rightDiv').html(content);
         }
     }).done(function(oUser) {
-
     }).fail(function(a, b, c) {
     });
 }
@@ -48,7 +48,7 @@ function showFilmGroups(ele){
 
 function fileUpload() {
     'use strict';
-    var currentId = $('#mediaNav').attr('currentId') ? $('#mediaNav').attr('currentId') : '';
+    //var currentId = $('#mediaNav').attr('currentId') ? $('#mediaNav').attr('currentId') : '';
     var url = '/upload';
     $('#uploadInput').fileupload({
         url: url,
@@ -56,8 +56,8 @@ function fileUpload() {
         add: function (e, data) {
             var clear = true
             $.each(data.files, function (index, file) {
-                if (file.size>1024*1024*1024*1.5) {
-                    if (!window.confirm('文件体积超过1.5GB，是否继续上传？')) {
+                if (file.size>1024*1024*10) {
+                    if (!window.confirm('文件体积超过10MB，是否继续上传？')) {
                         clear = false
                     }
                 } else {
@@ -82,7 +82,8 @@ function fileUpload() {
             }
         },
         done: function (e, data) {
-
+            $('#uploadClick').html(data.result.pname)
+            //console.log(data.result)
         },
     }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
 }
@@ -101,4 +102,17 @@ function validateMediaName($name) {
 
     else $result={status:true,message:''}
     return $result
+}
+
+function getFilmListPage(){
+    $.ajax({
+        type: "GET",
+        url: "/film/getListPage",
+        success:function(content){
+            $('#rightDiv').html(content);
+        }
+    }).done(function(oUser) {
+
+    }).fail(function(a, b, c) {
+    });
 }

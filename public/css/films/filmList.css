@@ -1,0 +1,7 @@
+.filmListDiv{
+    width:80%;
+    margin:auto
+}
+#filmListTable tbody tr{
+    cursor: pointer;
+}

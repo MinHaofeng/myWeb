@@ -1,0 +1,30 @@
+{% block style %}
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/films/filmDetail.css" />
+{% endblock style%}
+
+{% block script %}
+<script src="/js/films/filmDetail.js"></script>
+{% endblock script %}
+<div class="filmDetailDiv" id="filmDetailDiv" data-id="{{id}}">
+
+    <div id="filmImage">
+        <form>
+            <div class="form-group" id="uploadimg">
+                <div class="col-sm-5">
+                    <button id="uploadClick" class="btn-primary" type="button" onclick="clickupload()" style="width: 200px; height: 30px">选择图片</button>
+                    <input id="uploadInput" type="file" name="files[]" multiple="multiple" style="display: none"/>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="filmInfo" id="filmInfo">
+
+    </div>
+</div>
+
+{% block lazyscript %}
+<script src="/js/vendor/jquery.ui.widget.js"></script>
+<script src="/js/jquery.fileupload.js"></script>
+{% endblock lazyscript %}

@@ -15,6 +15,7 @@ exports.file = function(req, res) {
 };
 
 exports.upload = function(req, res) {
+  var url= '';
   var obj ={};
   var form = new formidable.IncomingForm({
     encoding:"utf-8",
@@ -26,7 +27,16 @@ exports.upload = function(req, res) {
         obj[name] = value;
       })
       .on('file', function(name, file) {  //文件
+        var pname = file.name;
+        var filepath = file.path;
+        var filename = filepath.split('\\')[2];
+        var url = filepath.split('\\')[1] + '/' + filename;
         obj[name] = file;
+        res.json({
+          'status' : '1',
+          'url' : url,
+          'pname' : pname
+        })
       })
       .on('error', function(error) {  //结束
         return res.json({
@@ -34,12 +44,10 @@ exports.upload = function(req, res) {
           'message' : error
         })
       })
-      .on('end', function() {  //结束
-        return res.json({
-          'status' : '1',
-          'message' : 'success'
-        })
+      .on('end', function(err,data) {  //结束
+        return
       });
+
 };
 
 exports.login = function(req, res) {

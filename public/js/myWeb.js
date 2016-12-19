@@ -75,3 +75,14 @@ function formatTime(nowdate,separator){
     var str_date = '' + year + separator + month + separator + day + ' ' + hour + ':' + minutes;
     return str_date;
 }
+
+String.prototype.getRealLength = function() {
+    var len = this.length;
+    var ret = 0;
+    for (var i = 0; i < len; i++) {
+        var a = this.charAt(i);
+        ret++;
+        if (escape(a).length > 4) ret++;
+    }
+    return ret;
+}

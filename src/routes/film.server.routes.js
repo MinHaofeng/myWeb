@@ -28,3 +28,15 @@ app.route('/film/removefromgroup')
 
 app.route('/film/getgroups')
     .get(film.getGroups)
+
+app.route('/film/getList')
+    .get(film.getList)
+
+app.route('/film/getListPage')
+    .get(film.getListPage)
+
+app.route('/film/getFilm')
+    .get(film.getFilm)
+
+app.route('/film/getFilmDetail')
+    .get(film.getFilmDetail)

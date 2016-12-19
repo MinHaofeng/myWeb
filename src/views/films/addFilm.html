@@ -7,10 +7,33 @@
     <script src="/js/build/jquery.datetimepicker.full.js"></script>
     <script src="/js/films/addFilm.js"></script>
 {% block script %}
+<script>
 
+
+    (function() {
+        $(function() {
+            return fileUpload();
+        });
+        this.isSave = true;
+        return window.onbeforeunload = function() {
+            if (!isSave) {
+                return '正在上传文件，重新加载或关闭此网页将取消上传，是否确定重新加载或关闭此网页';
+            }
+        };
+    }).call(this);
+
+</script>
 {% endblock script %}
 <div id="addFilmDiv" class="addFilmDiv">
     <form class="form-horizontal" role="form">
+        <!--<span class="btn btn-default fileinput-button"><span> 上传文件</span><input id="uploadInput" type="file" name="files[]" multiple="multiple" style="width: 100px; height: 30px"/></span>-->
+        <div class="form-group" id="uploadimg">
+            <label for="uploadImg" class="col-sm-2 control-label">上传图片</label>
+            <div class="col-sm-5">
+                <button id="uploadClick" class="btn-primary" type="button" onclick="clickupload()" style="width: 200px; height: 30px">选择图片</button>
+                <input id="uploadInput" type="file" name="files[]" multiple="multiple" style="display: none"/>
+            </div>
+        </div>
         <div class="form-group">
             <label for="filmName" class="col-sm-2 control-label">影片名</label>
             <div class="col-sm-10">
@@ -30,7 +53,7 @@
 
         <div class="form-group">
             <label for="actor" class="col-sm-2 control-label" style="height:28px">演员表</label>
-            <div class="col-sm-10 actor-list">
+            <div class="col-sm-10 actor-list" style="float:right">
                 <input type="text" class=""  placeholder="请输角色名字">:
                 <input type="text" class=""  placeholder="请输演员名字">
                 <span class="glyphicon glyphicon-plus addActor" style="width: 10px;height:10px" onclick="addActor(this)"></span>&nbsp
@@ -52,3 +75,10 @@
         </div>
     </form>
 </div>
+
+{% block lazyscript %}
+
+<script src="/js/vendor/jquery.ui.widget.js"></script>
+<script src="/js/jquery.fileupload.js"></script>
+
+{% endblock lazyscript %}

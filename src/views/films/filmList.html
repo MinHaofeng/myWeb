@@ -1,0 +1,31 @@
+{% block style %}
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/films/filmList.css" />
+{% endblock style%}
+
+{% block script %}
+<script src="/js/films/filmList.js"></script>
+{% endblock script %}
+<div class="filmListDiv" >
+
+    <div id="filmListDiv">
+        <table class="table table-hover" id="filmListTable">
+            <thead>
+            <tr>
+                <th>影片名称</th>
+                <th>创建时间</th>
+                <th>地区</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% raw %}
+
+            {% endraw %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% block lazyscript %}
+
+{% endblock lazyscript %}

@@ -72,6 +72,19 @@ exports.getFilms = function(req, res) {
   })
 };
 
+exports.getFilm = function(req, res) {
+  var filmid = req.query.filmid;
+  if(!filmid){
+    return res.json({
+      'status' : '0',
+      'message' : 'id not acepted!'
+    })
+  }
+  return res.render('films/filmDetail', {
+    id: filmid
+  });
+};
+
 exports.getFilmsInGroup = function(req, res) {
   var queryData = {}
   var groupid = '';
@@ -196,6 +209,10 @@ exports.addFilmContent = function(req,res){
   return res.render('films/addFilm')
 }
 
+exports.getListPage = function(req,res){
+  return res.render('films/filmList')
+}
+
 exports.filmGroupContent = function(req,res){
   return res.render('films/filmGroup')
 }
@@ -214,6 +231,45 @@ exports.getGroups = function(req, res) {
     })
   })
 };
+
+exports.getList = function(req,res){
+  Film.find().exec(function(err,films){
+    if(err){
+      return res.json({
+        'status' : '0',
+        'message' : 'Failed to find films!'
+      })
+    }
+    return res.json({
+      'status' : '1',
+      'data' : films
+    })
+
+  })
+}
+
+exports.getFilmDetail = function(req,res){
+  var filmid = req.query.filmid;
+  if(!filmid){
+    return res.json({
+      'status' : '0',
+      'message' : 'id not acepted'
+    })
+  }
+  Film.findById(Object(filmid)).exec(function(err,film){
+    if(err){
+      return res.json({
+        'status' : '0',
+        'message' : 'Failed to find the film!'
+      })
+    }
+    return res.json({
+      'status' : '1',
+      'data' : film
+    })
+
+  })
+}
 
 /*
  * 格式化时间，nowdate参数必须为date格式——new Date()方法创建的时间对象

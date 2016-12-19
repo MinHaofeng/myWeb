@@ -41,7 +41,6 @@ exports.getUserBoxes = function(req, res) {
 
 
 exports.requiresLogin = function(req, res, next) {
-  console.log(req)
   var token;
   if (req.cookies.token == null) {
     return res.redirect('/login');
