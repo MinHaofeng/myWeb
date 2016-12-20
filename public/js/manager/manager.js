@@ -49,7 +49,9 @@ function showFilmGroups(ele){
 function fileUpload() {
     'use strict';
     //var currentId = $('#mediaNav').attr('currentId') ? $('#mediaNav').attr('currentId') : '';
-    var url = '/upload';
+    var sType = $('#DetailDiv').attr('data-type');
+    var sId = $('#DetailDiv').attr('data-id');
+    var url = '/upload?type=' + sType + '&id=' + sId;
     $('#uploadInput').fileupload({
         url: url,
         dataType: 'json',
@@ -61,7 +63,7 @@ function fileUpload() {
                         clear = false
                     }
                 } else {
-                    if(!file.name.match(/\.png$|\.jpg$/)) {
+                    if(!file.name.match(/\.png$|\.jpg$|\.jpeg$/)) {
                         if (!window.confirm('上传的文件格式不支持，是否继续上传？')) {
                             clear = false
                         }
@@ -83,6 +85,7 @@ function fileUpload() {
         },
         done: function (e, data) {
             $('#uploadClick').html(data.result.pname)
+            $('#imgshow').attr('src',data.result.url);
             //console.log(data.result)
         },
     }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
@@ -109,6 +112,7 @@ function getFilmListPage(){
         type: "GET",
         url: "/film/getListPage",
         success:function(content){
+            $('.xdsoft_datetimepicker').remove();//删除时间控件
             $('#rightDiv').html(content);
         }
     }).done(function(oUser) {

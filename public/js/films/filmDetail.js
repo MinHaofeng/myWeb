@@ -3,7 +3,8 @@ $(function(){
 })
 
 function getFilmDetail(){
-    var filmid = $('#filmDetailDiv').attr('data-id');
+    var imgurl = '/images/default.jpeg';
+    var filmid = $('#DetailDiv').attr('data-id');
     $.ajax({
         type : 'get',
         url : '/film/getFilmDetail?filmid=' + filmid,
@@ -17,6 +18,22 @@ function getFilmDetail(){
             * 如果没有，显示默认图片
             * 如果有，显示上传的图片*/
             //listRender('#filmListTable tbody',data.data);
+            if(filmdetail.pictureurl){
+                imgurl = '/' + filmdetail.pictureurl;
+            }
+            $('#imgshow').attr('src',imgurl);
+            if(filmdetail.name){
+                $('#filmname span').html(filmdetail.name)
+            }
+            if(filmdetail.construction){
+                $('#filmconstruction span').html(filmdetail.construction)
+            }
+            if(filmdetail.publishtime){
+                $('#publishtime span').html(filmdetail.publishtime)
+            }
+            if(filmdetail.country){
+                $('#publisharea span').html(filmdetail.country)
+            }
         }
     })
 }

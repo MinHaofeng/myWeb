@@ -1,7 +1,9 @@
 var formidable = require('formidable')
-
 var mongoose = require('mongoose')
+var Film = mongoose.model('Film')
 var User = mongoose.model('User')
+var fs = require('fs');
+
 exports.index = function(req, res) {
   return res.render('index', {
     title: '首页'
@@ -15,6 +17,8 @@ exports.file = function(req, res) {
 };
 
 exports.upload = function(req, res) {
+  var stype = req.query.type;
+  var sid = req.query.id;
   var url= '';
   var obj ={};
   var form = new formidable.IncomingForm({
@@ -32,11 +36,43 @@ exports.upload = function(req, res) {
         var filename = filepath.split('\\')[2];
         var url = filepath.split('\\')[1] + '/' + filename;
         obj[name] = file;
-        res.json({
-          'status' : '1',
-          'url' : url,
-          'pname' : pname
-        })
+        if(stype == 'film'){
+          Film.findById(Object(sid)).exec(function(err,film){
+            if(err){
+              return res.json({
+                'status' : '0',
+                'message' : 'film not find!'
+              })
+            }
+            if(film.pictureurl){
+              if(fs.existsSync('./public/' + film.pictureurl)){
+                fs.unlinkSync('./public/' + film.pictureurl);
+              }
+            }
+            //console.log('./public/' + film.pictureurl);
+
+            film.pictureurl = url;
+            film.save(function(error,newFilm){
+              if(error){
+                return res.json({
+                  'status' : '0',
+                  'message' : 'film save failed!'
+                })
+              }
+              if(!newFilm.pictureurl){
+                return res.json({
+                  'status' : '0',
+                  'message' : 'url save failed!'
+                })
+              }
+              res.json({
+                'status' : '1',
+                'url' : '/' + newFilm.pictureurl,
+                'pname' : pname
+              })
+            })
+          })
+        }
       })
       .on('error', function(error) {  //结束
         return res.json({
@@ -104,3 +140,5 @@ exports.logout = function(req, res) {
   res.clearCookie('type');
   return res.redirect('/index');
 };
+
+

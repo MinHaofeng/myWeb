@@ -2,25 +2,54 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/films/filmDetail.css" />
 {% endblock style%}
-
-{% block script %}
+<script src="/js/jquery-1.10.2.js"></script>
 <script src="/js/films/filmDetail.js"></script>
+{% block script %}
+
+<script>
+    (function() {
+        $(function() {
+            return fileUpload();
+        });
+    }).call(this);
+
+</script>
 {% endblock script %}
-<div class="filmDetailDiv" id="filmDetailDiv" data-id="{{id}}">
+<div class="filmDetailDiv" id="DetailDiv" data-type="film" data-id="{{id}}">
 
-    <div id="filmImage">
-        <form>
-            <div class="form-group" id="uploadimg">
-                <div class="col-sm-5">
-                    <button id="uploadClick" class="btn-primary" type="button" onclick="clickupload()" style="width: 200px; height: 30px">选择图片</button>
-                    <input id="uploadInput" type="file" name="files[]" multiple="multiple" style="display: none"/>
-                </div>
+    <div id="filmImage" style="width:40%;float:left">
+        <div class="" style="width:100%;min-height:200px;padding:0 15px">
+            <img id="imgshow" src="" style="max-width:100%"/>
+        </div>
+
+        <div class="form-group" id="uploadimg">
+            <div class="col-sm-12">
+                <button id="uploadClick" class="btn-primary" type="button" onclick="clickupload()" style="width: 100%; height: 30px">选择图片</button>
+                <input id="uploadInput" type="file" name="files[]" multiple="multiple" style="display: none"/>
             </div>
-        </form>
+        </div>
+
     </div>
-
     <div class="filmInfo" id="filmInfo">
-
+        <div class="filmname col-sm-12" id="filmname">
+            <span></span>
+        </div>
+        <div class="filmconstruction col-sm-12" id="filmconstruction">
+            <span>
+            </span>
+        </div>
+        <div class="form-group" style="margin-top:10px;">
+            <label  class="col-sm-4 control-label">上映时间</label>
+            <div class="col-sm-8" id="publishtime">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-4 control-label">上映地区</label>
+            <div class="col-sm-8" id="publisharea">
+                <span></span>
+            </div>
+        </div>
     </div>
 </div>
 

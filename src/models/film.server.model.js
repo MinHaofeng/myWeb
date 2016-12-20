@@ -38,6 +38,10 @@ var FilmSchema = new Schema({
   groupid: {
     type: String,
     "default": ''
+  },
+  pictureurl:{
+    type: String,
+    "default": ''
   }
 });
 
