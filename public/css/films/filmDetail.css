@@ -18,3 +18,43 @@
     font-size:16px;
     font-weight: bold;
 }
+
+.actorDiv{
+    padding: 0 15px;
+    margin-top: 10px;
+    width: 100%;
+    min-height:40px;
+    clear: both;
+}
+
+.actor_list{
+    width:100%;
+    position:relative;
+
+}
+
+#actor_title{
+    text-align: center;
+    font-size: 18px;
+    font-family: "Microsoft YaHei";
+    background-color: gray;
+    color: #ffffff;
+}
+
+.actor_info{
+    padding: 0 30px 0 10px;
+    width:50%;
+    height: 40px;
+    line-height: 40px;
+    float:left;
+}
+
+.role_span{
+    float: left;
+    font-weight: bold;
+}
+
+.actor_span{
+    float: right;
+    color: #0000ff;
+}

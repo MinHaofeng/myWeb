@@ -3,7 +3,7 @@ $(function(){
 })
 
 function getFilmDetail(){
-    var imgurl = '/images/default.jpeg';
+    var imgurl = '/images/default.png';
     var filmid = $('#DetailDiv').attr('data-id');
     $.ajax({
         type : 'get',
@@ -33,6 +33,14 @@ function getFilmDetail(){
             }
             if(filmdetail.country){
                 $('#publisharea span').html(filmdetail.country)
+            }
+
+            if(filmdetail.mainactor){
+                $('#actor_list').empty();
+                $.each(filmdetail.mainactor,function(index,actor){
+                    var content = '<div class="actor_info"><span class="role_span">' + actor.role + '</span><span class="actor_span">' + actor.actor + '</span></div>';
+                    $('#actor_list').append(content);
+                })
             }
         }
     })

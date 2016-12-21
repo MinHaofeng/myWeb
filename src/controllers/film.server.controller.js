@@ -233,7 +233,7 @@ exports.getGroups = function(req, res) {
 };
 
 exports.getList = function(req,res){
-  Film.find().exec(function(err,films){
+  Film.find().sort({'createtime' : -1}).exec(function(err,films){
     if(err){
       return res.json({
         'status' : '0',
