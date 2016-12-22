@@ -44,6 +44,9 @@ app.controller('myFilmCtrl', function($scope,$http) {
         return alert('error!');
     })
 
-
-
 });
+
+function specialPage(ele){
+    var filmid = $(ele).attr('data-id');
+    location.href = '/film/special?filmid=' + filmid;
+}

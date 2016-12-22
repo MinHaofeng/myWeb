@@ -1,0 +1,55 @@
+{% extends '../layout.html' %}
+
+
+{% block style %}
+<link rel="stylesheet" href="/css/films/filmSpecial.css">
+{% endblock style%}
+
+{% block script %}
+
+<script src="/js/films/filmSpecial.js"></script>
+
+{% endblock script %}
+
+{% block main %}
+<div id="special_content" data-id="{{filmId}}" class="main_content" ng-app="filmSpecial" ng-controller="filmSpecialCtrl">
+    <div class="title_line">影片详情</div>
+    <div class="constructions">
+        <div class="img_left">
+            <img class="specialImage" id="imgshow" src="/images/default.jpeg">
+        </div>
+        <div class="info_right">
+            <table class="info_table">
+                <tr>
+                    <td class="t_title">影片名：</td>
+                    <td class="t_content" id="filmName">{{name}}</td>
+                </tr>
+                <tr>
+                    <td class="t_title">主 演：</td>
+                    <td class="t_content" id="mainActor">{{mainActor}}</td>
+                </tr>
+                <tr>
+                    <td class="t_title">上映时间：</td>
+                    <td class="t_content" id="publishTime">{{time}}</td>
+                </tr>
+                <tr>
+                    <td class="t_title">上映地区：</td>
+                    <td class="t_content" id="publishArea">{{area}}</td>
+                </tr>
+                <tr>
+                    <td class="t_title">简 介：</td>
+                    <td class="t_content" id="summary">{{summary}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="title_line">影片评论区</div>
+</div>
+
+{% raw %}
+{% endraw %}
+
+{% endblock main%}
+
+{% block lazyscript %}
+{% endblock lazyscript %}

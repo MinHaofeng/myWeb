@@ -13,6 +13,40 @@ exports.index = function(req, res) {
   });
 };
 
+exports.getSpecialPage = function(req, res) {
+  var filmid = req.query.filmid;
+  if(!filmid){
+    return res.render('error', {
+      error: '未获取到页面！'
+    });
+  }
+  Film.findById(Object(filmid)).exec(function(err,film){
+    var filmName = film.name;
+    var filmId = film.id;
+    var mainActorArray = film.mainactor;
+    var publishtime = film.publishtime;
+    var publisharea = film.country;
+    var summary = film.construction;
+    var mainActor = '';
+    for(var i=0;i<mainActorArray.length;i++){
+      mainActor += mainActorArray[i].actor + '[' + mainActorArray[i].role + ']';
+      if(i < mainActorArray.length-1){
+        mainActor += ', ';
+      }
+    }
+    return res.render('films/filmSpecial', {
+      title: '电影专区-' + filmName,
+      name: filmName,
+      filmId: filmId,
+      mainActor: mainActor,
+      time: publishtime,
+      area: publisharea,
+      summary: summary
+    });
+  })
+
+};
+
 exports.addFilm = function(req, res) {
   var _film = req.body;
   if(!_film){

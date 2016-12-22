@@ -40,3 +40,6 @@ app.route('/film/getFilm')
 
 app.route('/film/getFilmDetail')
     .get(film.getFilmDetail)
+
+app.route('/film/special')
+    .get(film.getSpecialPage)

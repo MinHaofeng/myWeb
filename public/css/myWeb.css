@@ -12,6 +12,23 @@
     background-image: url("/images/head_bg.jpg");
 }
 
+.main_content{
+    width:1000px;
+    min-height:600px;
+    border:1px solid black;
+    margin:20px auto 20px auto;
+    padding:20px;
+}
+
+.title_line{
+    text-align: center;
+    font-size: 18px;
+    font-family: "Microsoft YaHei";
+    background-color: gray;
+    color: #ffffff;
+    margin: 0 0px 10px 0px;
+}
+
 .titles{
     font-size:20px;
     color:blue;
@@ -81,4 +98,55 @@
 .loginBtns{
     float:right;
     line-height: 40px;
+}
+
+.constructions{
+    width: 100%;
+    padding: 10px 10px;
+    min-height: 350px;
+}
+
+.img_left{
+    float:left;
+    width:300px;
+    min-height: 300px;
+
+}
+
+.info_right{
+    float:left;
+    width:615px;
+    min-height: 300px;
+    margin-left: 20px;
+
+}
+
+.info_table{
+    width:100%;
+}
+
+.info_table tr{
+    height:40px;
+}
+
+.t_title{
+    font-size: 16px;
+    font-family: "microsoft yahei";
+    font-weight: bold;
+    width: 20%;
+    text-align: right;
+    vertical-align: top;
+}
+
+.t_content{
+    font-size: 16px;
+    font-family: "microsoft yahei";
+    width: 90%;
+    text-align: left;
+    padding-left: 20px;
+    vertical-align: top;
+}
+
+.specialImage{
+    max-width: 100%;
 }

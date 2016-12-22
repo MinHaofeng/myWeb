@@ -41,6 +41,15 @@
     color: #ffffff;
 }
 
+#detail_title{
+    text-align: center;
+    font-size: 18px;
+    font-family: "Microsoft YaHei";
+    background-color: gray;
+    color: #ffffff;
+    margin: 0 15px 10px 15px;
+}
+
 .actor_info{
     padding: 0 30px 0 10px;
     width:50%;
