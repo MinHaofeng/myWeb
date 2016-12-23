@@ -43,3 +43,6 @@ app.route('/film/getFilmDetail')
 
 app.route('/film/special')
     .get(film.getSpecialPage)
+
+app.route('/film/addComment')
+    .post(film.addComment)

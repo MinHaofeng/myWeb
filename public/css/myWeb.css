@@ -150,3 +150,76 @@
 .specialImage{
     max-width: 100%;
 }
+
+.commentDiv{
+    width: 100%;
+    padding: 10px 10px;
+    min-height: 200px;
+}
+
+.commentArea{
+    position:relative;
+    width: 100%;
+    padding: 10px 10px;
+    min-height: 100px;
+
+}
+
+.commentInput{
+    width:60%;
+    height:100px;
+    margin-left:148px
+}
+
+.submitBtn{
+    width:100px;
+    height:100px;
+    position:absolute;
+    bottom:10px
+}
+
+.zwpl{
+    background: url("/images/zwpl.png");
+}
+
+.commentList{
+    position: relative;
+    width:80%;
+    min-height:100px;
+    margin:auto;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.commentUser{
+    color:green;
+    font-family: "SimHei";
+    font-size:14px
+}
+
+.commentContent{
+    width:90%;
+    margin-top:10px;
+    margin-bottom: 25px;
+    font-family: "KaiTi";
+    font-size: 18px;
+}
+
+.attentionArea{
+    position:absolute;
+    left:10px;
+    bottom:5px;
+    width: 50px;
+    height:20px;
+    font-size: 14px;
+    color: grey;
+}
+
+.createtimeArea{
+    position:absolute;
+    right:20px;
+    bottom:5px;
+    width: 150px;
+    height:20px;
+    font-size: 14px;
+    color: grey;
+}

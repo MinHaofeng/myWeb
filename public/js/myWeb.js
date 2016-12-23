@@ -86,3 +86,17 @@ String.prototype.getRealLength = function() {
     }
     return ret;
 }
+
+function getTargetId(){
+    var targetid = $('#special_content').attr('data-id');
+    return targetid;
+}
+
+function getCommentCotent(){
+    var content = $('#commentInput').val();
+    return content;
+}
+
+function clearComment(){
+    $('#commentInput').val('');
+}

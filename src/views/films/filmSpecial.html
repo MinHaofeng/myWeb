@@ -44,10 +44,21 @@
         </div>
     </div>
     <div class="title_line">影片评论区</div>
+    <div id="commentDiv" class="commentDiv">
+        {% raw %}
+        <div ng-repeat="x in comments" class="commentList">
+            <div class="commentUser">{{x.user}}</div>
+            <div class="commentContent">{{x.content}}</div>
+            <div class="attentionArea"><i class="glyphicon glyphicon-heart" style="font-size: 16px"></i> {{x.attention}}</div>
+            <div class="createtimeArea">{{x.createtime}}</div>
+        </div>
+        {% endraw %}
+    </div>
+    <div class="commentArea">
+        <textarea id="commentInput" class="commentInput"></textarea>
+        <button class="submitBtn" ng-click="submitComment()">提交评论</button>
+    </div>
 </div>
-
-{% raw %}
-{% endraw %}
 
 {% endblock main%}
 

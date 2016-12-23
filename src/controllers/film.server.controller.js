@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
 var _ = require('lodash')
 var errorHandler = require('./errors.server.controller')
 var Film = mongoose.model('Film')
+var Comment = mongoose.model('Comment')
 var crypto = require('crypto')
 var async = require('async')
 var logger = require('../models/logger.server.model')
@@ -303,6 +304,40 @@ exports.getFilmDetail = function(req,res){
     })
 
   })
+}
+
+exports.addComment = function(req,res){
+  var comment = req.body;
+  var cookies = req.cookies;
+  comment.user = cookies.name;
+  var nowdate = new Date();
+  var createtime = formatTime(nowdate,'-',true);
+  comment.createtime = createtime;
+  comment.type = 'film';
+  comment.attention = 0;
+  comment.attentionUser = [];
+  comment.score = 0;
+  Comment.create(comment,function(err,tComment){
+    if(err){
+      return res.json({
+        status : '0',
+        message: 'comment create failed!'
+      })
+    }
+    tComment.id = tComment._id;
+    return tComment.save(function(error,newComment) {
+      if (error) {
+        return res.status(500).send({
+          status: "fail"
+        });
+      }
+      return res.json({
+        'status' : '1',
+        'data' : newComment
+      });
+    });
+  })
+  //return res.json({result:comment})
 }
 
 /*
