@@ -45,3 +45,16 @@ function getFilmDetail(){
         }
     })
 }
+
+function editFilm(){
+    var filmid = $('#DetailDiv').attr('data-id');
+    $.ajax({
+        type: "GET",
+        url: "/film/editFilm?id=" + filmid,
+        success:function(content){
+            $('#rightDiv').html(content);
+        }
+    }).done(function(oUser) {
+    }).fail(function(a, b, c) {
+    });
+}

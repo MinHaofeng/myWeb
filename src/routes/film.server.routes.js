@@ -10,6 +10,9 @@ app.route('/film/index')
 app.route('/film/addFilm')
     .post(user.requiresLogin,film.addFilm)
 
+app.route('/film/updateFilm')
+    .post(user.requiresLogin,film.updateFilm)
+
 app.route('/film/getFilms')
     .get(film.getFilms)
 
@@ -46,3 +49,6 @@ app.route('/film/special')
 
 app.route('/film/addComment')
     .post(film.addComment)
+
+app.route('/film/editFilm')
+    .get(film.editFilm)

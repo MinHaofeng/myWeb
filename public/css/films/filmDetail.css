@@ -67,3 +67,10 @@
     float: right;
     color: #0000ff;
 }
+
+.buttonsDiv{
+    width:100%;
+    min-height: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+}

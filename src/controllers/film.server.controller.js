@@ -81,6 +81,45 @@ exports.addFilm = function(req, res) {
   });
 };
 
+exports.updateFilm = function(req, res) {
+  var _film = req.body;
+  if(!_film){
+    return res.json({
+      status:'0',
+      message:'no data accepted!'
+    })
+  }
+  var nowdate = new Date();
+  var createTime = formatTime(nowdate,'-',true);
+  _film.createtime = createTime;
+  _film.createtimeshow = createTime.split(' ')[0]
+  Film.findById(Object(_film.id)).exec(function(err, film) {
+    if (err) {
+      return res.status(500).send({
+        status: "fail"
+      });
+    }
+    film.name = _film.name;
+    film.mainactor = _film.mainactor
+    film.construction = _film.construction;
+    film.country = _film.country;
+    film.publishtime = _film.publishtime;
+    /*film.createtime = _film.createtime;
+    film.createtimeshow = _film.createtimeshow;*/
+    return film.save(function(err,newFilm) {
+      if (err) {
+        return res.status(500).send({
+          status: "fail"
+        });
+      }
+      return res.json({
+        'status' : '1',
+        'data' : newFilm
+      });
+    });
+  });
+};
+
 exports.getFilms = function(req, res) {
   var queryData = {}
   var groupid = '';
@@ -280,6 +319,18 @@ exports.getList = function(req,res){
       'data' : films
     })
 
+  })
+}
+
+exports.editFilm = function(req,res){
+  var filmid = req.query.id;
+  Film.findById(Object(filmid)).exec(function(err,film){
+    return res.render('films/addFilm',{
+      'id': film.id,
+      'construction': film.construction,
+      'country': film.country,
+      'name': film.name
+    })
   })
 }
 
