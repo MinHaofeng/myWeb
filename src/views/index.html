@@ -2,18 +2,25 @@
 
 
 {% block style %}
-
+<link rel="stylesheet" href="/css/main.css">
 {% endblock style%}
 
 {% block script %}
+<script src="/js/main.js"></script>
 {% endblock script %}
 
 {% block main %}
 
-<div id="home_content" class="home_content">
+<div id="home_content" class="home_content" ng-app="mainApp" ng-controller="mainCtrl">
     <div id="list_films" class="modules">
         <span class="list_title">电影区</span>
         <div id="films" class="main_lists">
+            {% raw %}
+            <div class="lists" onclick="specialPage(this)" ng-repeat="x in films1" data-id="{{x.id}}">
+                <span class="lists_left">{{x.name}}</span>
+                <span class="lists_right">{{x.createtimeshow}}</span>
+            </div>
+            {% endraw %}
         </div>
     </div>
 

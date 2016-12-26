@@ -24,12 +24,9 @@ $(function(){
 
 function addActor(ele){
     var old = $(ele).parent();
-    var content = '<div class="col-sm-10 actor-list" style="margin-top:10px;float:right"><input type="text" class=""  placeholder="请输人物名字">: <input type="text" class=""  placeholder="请输演员名字"> <span class="glyphicon glyphicon-plus addActor" style="width: 10px;height:10px" onclick="addActor(this)"></span>&nbsp <span class="glyphicon glyphicon-minus deleteActor" style="width: 10px;height:10px" onclick="deleteActor(this)"></span></div> ';
+    var content = '<div class="col-sm-10 actor-list" style="margin-top:10px;float:right"><input type="text" class=""  placeholder="请输人物名字">: <input type="text" class=""  placeholder="请输演员名字"> <span class="glyphicon glyphicon-plus addActor" style="width: 20px;height:20px" onclick="addActor(this)"></span>&nbsp <span class="glyphicon glyphicon-minus deleteActor" style="width: 20px;height:20px" onclick="deleteActor(this)"></span></div> ';
     $(content).insertAfter(old);
     $('.deleteActor').show();
-    if($('.actor-list').length >= 8){
-        $('.addActor').hide();
-    }
 }
 
 function deleteActor(ele){
@@ -133,8 +130,12 @@ function renderFilm(filmid){
             var mainactors = film.mainactor;
             $('.actor-list:first input:first').val(mainactors[0].role);
             $('.actor-list:first input:last').val(mainactors[0].actor);
+            if(mainactors.length == 1){
+                return;
+            }
+            $('.deleteActor').show();
             for(var i=1;i<mainactors.length;i++){
-                var content = '<div class="col-sm-10 actor-list" style="margin-top:10px;float:right"><input type="text" class=""  placeholder="请输人物名字" value="' + mainactors[i].role + '">: <input type="text" class=""  placeholder="请输演员名字" value="' + mainactors[i].actor + '"> <span class="glyphicon glyphicon-plus addActor" style="width: 10px;height:10px" onclick="addActor(this)"></span>&nbsp <span class="glyphicon glyphicon-minus deleteActor" style="width: 10px;height:10px" onclick="deleteActor(this)"></span></div> ';
+                var content = '<div class="col-sm-10 actor-list" style="margin-top:10px;float:right"><input type="text" class=""  placeholder="请输人物名字" value="' + mainactors[i].role + '">: <input type="text" class=""  placeholder="请输演员名字" value="' + mainactors[i].actor + '"> <span class="glyphicon glyphicon-plus addActor" style="width: 20px;height:20px" onclick="addActor(this)"></span>&nbsp <span class="glyphicon glyphicon-minus deleteActor" style="width: 20px;height:20px" onclick="deleteActor(this)"></span></div> ';
                 $('#actorAdd').append(content)
             }
         }
